@@ -1,0 +1,450 @@
+/* Shared appearance tokens. Keep the warm paper / sage identity at night. */
+:root {
+  color-scheme: light;
+  --surface-soft: #f4f5ef;
+  --surface-hover: #edf1e7;
+  --border-strong: #d6ddce;
+  --accent: #45633b;
+  --accent-soft: #e2e8d8;
+  --focus: #64806b;
+  --shadow: 0 4px 16px #213b3308;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #171d1a;
+  --surface: #1e2621;
+  --sidebar: #141b17;
+  --surface-soft: #252f28;
+  --surface-hover: #2b382f;
+  --ink: #e3ebe0;
+  --text: #cbd6c8;
+  --muted: #a5b39e;
+  --line: #323e34;
+  --border-strong: #50604c;
+  --green: #b0c79e;
+  --green-light: #2c3d2d;
+  --accent: #b6cda5;
+  --accent-soft: #2d3e2c;
+  --focus: #a6c28e;
+  --shadow: 0 4px 16px #00000018;
+}
+.task-state.waiting_on_client {
+  background: #f3efe3;
+  color: #705a2f;
+}
+.task-state.waiting_on_me {
+  background: #efedf3;
+  color: #665474;
+}
+:root[data-theme="dark"] .task-state.waiting_on_client {
+  background: #3a3326;
+  color: #dfc592;
+}
+:root[data-theme="dark"] .task-state.waiting_on_me {
+  background: #342d3e;
+  color: #cebbdf;
+}
+:root[data-theme="dark"] .first-run {
+  background: linear-gradient(120deg, var(--green-light), var(--surface-soft));
+  border-color: var(--border-strong);
+}
+:root[data-theme="dark"] .first-run-error {
+  color: #efb49d !important;
+}
+.theme-control {
+  border: 0;
+  padding: 0;
+  margin: 0 3px 15px;
+  min-width: 0;
+}
+.theme-control legend {
+  color: var(--muted);
+  font-size: var(--text-control);
+  padding: 0 8px;
+  margin-bottom: 9px;
+}
+.theme-options {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  background: var(--surface-soft);
+  border-radius: 8px;
+}
+.theme-options label {
+  flex: 1;
+  position: relative;
+  cursor: pointer;
+}
+.theme-options input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.theme-options label > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 9px 2px;
+  border-radius: 5px;
+  font-size: var(--text-control);
+  color: var(--muted);
+  transition:
+    background 120ms,
+    color 120ms;
+  flex-wrap: wrap;
+  overflow-wrap: anywhere;
+}
+.theme-options label:hover > span {
+  background: var(--surface-hover);
+}
+.theme-options input:checked + span {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+.theme-options input:focus-visible + span {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+.sidebar-project[aria-current="page"] {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.breadcrumb {
+  min-width: 0;
+}
+.breadcrumb strong {
+  overflow-wrap: anywhere;
+}
+.breadcrumb a:hover {
+  color: var(--accent);
+}
+.topbar {
+  gap: 20px;
+}
+.topbar-actions {
+  flex-shrink: 0;
+}
+.project-card {
+  display: block;
+}
+.project-card h3,
+.project-customer,
+.detail-note {
+  overflow-wrap: anywhere;
+}
+
+/* Legacy workspace surfaces share these tokens, including dialogs and forms. */
+:root[data-theme="dark"] {
+  ::selection {
+    background: #45633b;
+    color: #fff;
+  }
+  button:focus-visible,
+  a:focus-visible {
+    outline-color: var(--focus);
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline-color: var(--focus);
+  }
+  .brand,
+  .breadcrumb strong,
+  .stat-number,
+  .search-results > button > span,
+  .command-search input {
+    color: var(--ink);
+  }
+  .brand-mark i {
+    background: var(--accent);
+  }
+  .brand-period {
+    color: var(--muted);
+  }
+  .sidebar {
+    border-color: var(--line);
+  }
+  .topbar {
+    background: var(--bg);
+  }
+  .panel,
+  .stat-card,
+  .project-card,
+  .customer-card,
+  .filter-search,
+  .secondary,
+  .dialog,
+  .toast,
+  .editor-form input,
+  .editor-form textarea,
+  .editor-form select,
+  .activity-form textarea,
+  .activity-form select,
+  .stage-select {
+    background: var(--surface);
+    border-color: var(--line);
+    color: var(--text);
+  }
+  .note-editor {
+    background: var(--surface) !important;
+  }
+  .search-trigger,
+  kbd,
+  .search-trigger kbd,
+  .count-badge,
+  .nav-count,
+  .project-tag,
+  .progress-track,
+  .notes-strip > button,
+  .segmented,
+  .new-project-card,
+  .pipeline-column,
+  .note-card,
+  .empty-icon,
+  .follow-up-detail,
+  .activity-form,
+  .timeline-marker,
+  .local-help,
+  .example-banner {
+    background: var(--surface-soft);
+    border-color: var(--line);
+    color: var(--muted);
+  }
+  .paper-1 {
+    background: #28262f;
+    border-color: #3c3745;
+  }
+  .paper-2 {
+    background: #2b2922;
+    border-color: #403b2e;
+  }
+  .nav-item:hover,
+  .sidebar-project:hover,
+  .icon-button:hover,
+  .secondary:hover,
+  .ghost:hover,
+  .project-tag:hover,
+  .inline-add:hover,
+  .pipeline-link:hover,
+  .notes-strip > button:hover,
+  .tabs > button:hover,
+  .new-project-card:hover,
+  .search-results > button:hover {
+    background: var(--surface-hover);
+    color: var(--accent);
+  }
+  .nav-item.selected,
+  .sidebar-project[aria-current="page"],
+  .search-results > button[aria-selected="true"] {
+    background: var(--accent-soft);
+    color: var(--accent);
+    outline-color: var(--border-strong);
+  }
+  .primary {
+    background: var(--green);
+    color: #1b2b18;
+    border-color: var(--green);
+  }
+  .primary:hover {
+    background: #c0d5b0;
+    border-color: #c0d5b0;
+  }
+  .danger {
+    background: #ae493d;
+    color: #fff;
+  }
+  .tabs > button.active {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .segmented > button.active {
+    background: var(--surface);
+    color: var(--accent);
+  }
+  .stat-card:hover,
+  .project-card:hover,
+  .customer-card:hover,
+  .note-card:hover,
+  .new-project-card:hover {
+    border-color: var(--border-strong);
+  }
+  .attention-group + .attention-group,
+  .task-row,
+  .inline-add,
+  .inline-add span,
+  .follow-up,
+  .pipeline-link,
+  .project-card-bottom,
+  .customer-card-footer,
+  .note-card-bottom,
+  .topbar-divider {
+    border-color: var(--line);
+  }
+  .task-check {
+    border-color: #718169;
+  }
+  .task-check:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+  }
+  .task-check.checked {
+    background: #35472e;
+    border-color: #71875d;
+    color: #c0d6ab;
+  }
+  .task-title:hover,
+  .detail-note:hover,
+  .text-link:hover,
+  .follow-up:hover .follow-up-copy strong {
+    color: var(--accent);
+  }
+  .completed .task-title {
+    color: #91a087;
+  }
+  .completed .task-meta {
+    opacity: 0.8;
+  }
+  .stat-icon.green,
+  .project-mark.green,
+  .status-pill,
+  .status-pill.completed {
+    background: #2d3d2a;
+    color: #b6cba1;
+  }
+  .stat-icon.purple,
+  .project-mark.purple,
+  .lavender {
+    background: #36303e;
+    color: #c6b2db;
+  }
+  .stat-icon.orange,
+  .project-mark.orange,
+  .sand,
+  .status-pill.paused,
+  .follow-up-date.due {
+    background: #3b3226;
+    color: #d6ba90;
+  }
+  .project-mark.blue {
+    background: #283b42;
+    color: #9cc4d3;
+  }
+  .dialog::backdrop {
+    background: #070d0ac2;
+  }
+  .sidebar-scrim {
+    background: #070d0ab3;
+  }
+  .dialog,
+  .toast {
+    box-shadow: 0 20px 70px #00000040;
+  }
+  .form-error,
+  .delete-confirm {
+    background: #382722;
+    border-color: #634035;
+    color: #efb49d;
+  }
+  .dialog-feedback.form-error,
+  .delete-confirm p {
+    color: #efb49d;
+  }
+  .delete-button {
+    color: #dfac98;
+  }
+  .delete-button:hover {
+    background: #382722;
+    color: #efb49d;
+  }
+  .overdue {
+    color: #e7a38c !important;
+  }
+  .priority {
+    color: #d6ba90;
+  }
+  .filter-search:focus-within {
+    outline-color: var(--focus);
+  }
+  .command-search:focus-within {
+    box-shadow: inset 0 -2px var(--focus);
+  }
+  .icon-button,
+  .text-link,
+  .stat-title,
+  .stat-caption,
+  .detail-description,
+  .timeline-item p,
+  .note-card > p,
+  .project-card > p,
+  .panel-caption,
+  .project-customer,
+  .task-date,
+  .follow-up-copy small,
+  .project-card-bottom,
+  .project-progress-label,
+  .result-count,
+  .note-card-bottom,
+  .customer-card p,
+  .customer-card-footer,
+  .customer-list-name small,
+  .detail-empty,
+  .empty-state p,
+  .empty-state h3,
+  .timeline-meta time,
+  .local-help,
+  .page-heading p,
+  .nav-heading,
+  .nav-item,
+  .sidebar-project,
+  .sidebar-empty,
+  .column-empty,
+  .column-count,
+  .search-group-label,
+  .search-results small,
+  .project-tag,
+  .note-card-top,
+  .follow-up-date,
+  .dialog-head p,
+  .clear-content > p,
+  .help-content > p,
+  .list-label,
+  .list-label > span:last-child,
+  .note-card-bottom time,
+  .search-empty,
+  .search-hints,
+  .submit-hint,
+  .tabs > button,
+  .segmented > button,
+  .search-trigger,
+  .example-banner button,
+  .new-project-card h3,
+  .new-project-card p,
+  .editor-form label,
+  .inline-add,
+  .inline-add span,
+  .notes-strip > button > svg:last-child,
+  .customer-list > button > svg {
+    color: var(--muted);
+  }
+  .editor-form input::placeholder,
+  .editor-form textarea::placeholder,
+  .activity-form textarea::placeholder,
+  .command-search input::placeholder,
+  .filter-search input::placeholder {
+    color: #97a58e;
+  }
+  .help-content strong,
+  .follow-up-detail strong,
+  .customer-email,
+  .detail-note,
+  .timeline-meta strong,
+  .dialog-feedback,
+  .pipeline-link,
+  .toast {
+    color: var(--accent);
+  }
+}

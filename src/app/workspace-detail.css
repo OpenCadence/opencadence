@@ -1,0 +1,432 @@
+.project-page {
+  padding: 2px 0 48px;
+}
+.project-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font-size: var(--text-control);
+  padding: 8px 0;
+  margin-bottom: 24px;
+}
+.project-back:hover {
+  color: var(--accent);
+}
+.project-hero {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 30px;
+}
+.project-hero > .project-mark {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+.project-hero > .project-mark svg {
+  width: 26px;
+  height: 26px;
+}
+.project-hero-copy {
+  flex: 1;
+  min-width: 0;
+}
+.project-title-line {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.project-title-line h1 {
+  font: 500 var(--text-page)/1.25 var(--heading);
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+}
+.project-title-line .status-pill {
+  padding: 5px 9px;
+}
+.project-hero .detail-description {
+  line-height: 1.85;
+  max-width: 760px;
+  margin: 0;
+  color: var(--muted);
+}
+.project-hero > .button {
+  margin-top: 5px;
+}
+.project-overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.25fr;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  margin-bottom: 32px;
+  padding: 22px 0;
+}
+.project-fact {
+  padding: 0 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 11px;
+  min-width: 0;
+}
+.project-fact + .project-fact {
+  border-left: 1px solid var(--line);
+}
+.project-fact-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: var(--text-control);
+  color: var(--muted);
+}
+.project-fact strong,
+.project-customer-link {
+  color: var(--ink);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+  font-size: var(--text-body);
+}
+.project-customer-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0;
+  text-align: left;
+  width: fit-content;
+}
+.project-customer-link:hover {
+  color: var(--accent);
+}
+.project-completion > div:not(.progress-track) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.project-completion > div > span {
+  font-size: var(--text-meta);
+  color: var(--muted);
+}
+.project-completion .progress-track {
+  width: 100%;
+  height: 5px;
+}
+.project-completion .progress-track > span {
+  transition: width 180ms ease-out;
+}
+.project-content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+}
+.project-content-grid .panel {
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.project-content-grid .section-heading {
+  padding: 22px 22px 0;
+}
+.project-content-grid .text-link {
+  color: var(--accent);
+}
+.project-task-tabs {
+  margin: 16px 16px 0;
+  gap: 10px;
+}
+.project-task-tabs > button {
+  color: var(--muted);
+  display: flex;
+  gap: 7px;
+  padding: 12px 6px;
+}
+.project-task-tabs > button > span {
+  font-size: var(--text-meta);
+  color: var(--muted);
+}
+.project-task-rows {
+  padding: 0 22px;
+}
+.project-task-rows .task-row {
+  min-height: 60px;
+  gap: 12px;
+}
+.project-task-rows .task-row:first-child {
+  border-top: 0;
+}
+.project-task-rows .task-check {
+  width: 19px;
+  height: 19px;
+  border-color: var(--muted);
+  position: relative;
+}
+.project-task-rows .task-check::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+}
+.project-task-rows .row-more {
+  width: 28px;
+  height: 32px;
+}
+.project-tasks .inline-add {
+  padding: 17px 22px;
+  color: var(--accent);
+}
+.project-content-grid .empty-state {
+  padding: 44px 20px;
+}
+.project-notes .panel-caption {
+  padding: 10px 22px 18px;
+}
+.project-note-list {
+  padding: 0 22px 6px;
+}
+.project-note {
+  width: 100%;
+  text-align: left;
+  border-top: 1px solid var(--line);
+  padding: 20px 0;
+}
+.project-note > div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+}
+.project-note h3 {
+  flex: 1;
+  font-size: var(--text-body);
+  font-weight: 500;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.project-note:hover h3 {
+  color: var(--accent);
+}
+.project-note > p {
+  color: var(--muted);
+  font-size: var(--text-body);
+  line-height: 1.8;
+  margin: 9px 0 13px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.project-note time {
+  font-size: var(--text-meta);
+  color: var(--muted);
+}
+.project-note-list .empty-state {
+  padding: 28px 0 34px;
+}
+.client-mark {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--accent);
+  background: var(--accent-soft);
+  margin-top: 4px;
+}
+.relationship-pill {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 4px 9px;
+  font-size: var(--text-meta);
+  font-weight: 600;
+  background: var(--line);
+  color: var(--muted);
+}
+.relationship-pill.client {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.relationship-pill.archived {
+  opacity: 0.7;
+}
+.client-overview .customer-email {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.client-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: -12px 0 28px;
+}
+.client-content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(320px, 1fr);
+  align-items: start;
+  gap: 24px;
+}
+.client-content-grid > .panel,
+.client-context > .panel {
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.client-content-grid .section-heading {
+  padding: 22px 22px 8px;
+}
+.client-project-row > span:nth-child(2) {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+.client-project-row small {
+  color: var(--muted);
+  font-size: var(--text-meta);
+}
+.client-work > .detail-note {
+  margin: 0 22px;
+  width: calc(100% - 44px);
+}
+.client-section-gap {
+  margin-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.client-work .inline-add {
+  margin-top: 12px;
+}
+.client-context {
+  display: grid;
+  gap: 24px;
+}
+.client-activity {
+  padding-bottom: 20px;
+}
+.client-activity .activity-composer,
+.client-activity .timeline {
+  margin-left: 22px;
+  margin-right: 22px;
+}
+.client-activity .activity-composer {
+  padding: 10px 0 24px;
+  border-bottom: 1px solid var(--line);
+}
+.client-activity .activity-form.plain {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.compact-empty {
+  padding: 30px 20px;
+}
+
+@media (max-width: 1100px) {
+  .project-content-grid,
+  .client-content-grid {
+    grid-template-columns: 1fr;
+  }
+  .project-hero {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+  }
+  .project-hero > .button {
+    grid-column: 2;
+    justify-self: start;
+    margin: 0;
+  }
+  .project-fact {
+    padding: 0 18px;
+  }
+}
+@media (max-width: 700px) {
+  .project-back {
+    margin-bottom: 16px;
+  }
+  .project-hero {
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .client-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+  }
+  .project-hero > .project-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+  }
+  .project-title-line {
+    gap: 10px;
+  }
+  .project-overview {
+    grid-template-columns: 1fr 1fr;
+    padding: 18px 0 0;
+    margin-bottom: 24px;
+  }
+  .project-fact {
+    padding: 0 16px;
+  }
+  .project-completion {
+    grid-column: 1 / -1;
+    margin-top: 20px;
+    padding: 18px 16px;
+    border-top: 1px solid var(--line);
+  }
+  .project-fact.project-completion {
+    border-left: 0;
+  }
+  .client-overview .project-fact:last-child {
+    grid-column: 1 / -1;
+    margin-top: 18px;
+    padding: 18px 16px;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .client-actions {
+    margin-top: -8px;
+  }
+  .project-content-grid {
+    gap: 20px;
+  }
+  .project-content-grid .section-heading {
+    padding: 20px 16px 0;
+  }
+  .project-task-tabs {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+  .project-task-rows {
+    padding: 0 16px;
+  }
+  .project-task-rows .task-row {
+    gap: 9px;
+  }
+  .project-task-rows .task-meta {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .project-task-rows .task-date {
+    min-width: 0;
+  }
+  .project-notes .panel-caption {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .project-note-list {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

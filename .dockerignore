@@ -1,0 +1,16 @@
+.git
+.github
+.next
+node_modules
+data
+.env*
+.mcp.json
+mcp.config.json
+.pi
+coverage
+playwright-report
+test-results
+*.tsbuildinfo
+*.log
+*.sqlite*
+*.db*

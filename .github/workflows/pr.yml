@@ -1,0 +1,109 @@
+name: Pull request checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Checks (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22.13.0, 22.x, 24.x, 26.x]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm audit --prod --audit-level high
+
+  browser:
+    name: Browser tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.13.0
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:ui
+      - name: Upload browser diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-diagnostics
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  container:
+    name: Container build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: docker build --build-arg SOURCE_REVISION=${{ github.sha }} --tag opencadence-community:ci .
+      - name: Verify source and licensing payload
+        run: |
+          docker run --rm --entrypoint sh opencadence-community:ci -c '
+            set -eu
+            test -f /usr/src/opencadence/package.json
+            test -f /usr/src/opencadence/pnpm-lock.yaml
+            test -f /usr/src/opencadence/Dockerfile
+            test -f /app/LICENSE
+            test -f /app/THIRD_PARTY_NOTICES.md
+            find /usr/share/licenses/opencadence-dependencies -path "*/next/license.md" | grep -q .
+            find /usr/share/licenses/opencadence-dependencies -path "*/react/LICENSE" | grep -q .
+            find /usr/share/licenses/opencadence-dependencies -path "*/@swc/helpers/LICENSE" | grep -q .
+            ! find /app/node_modules -type f \( -iname "*sharp*" -o -iname "*libvips*" \) | grep -q .
+          '
+      - name: Verify health, backup, and volume persistence
+        run: |
+          set -euo pipefail
+          docker volume create opencadence-ci-data
+          docker run -d --name opencadence-ci -p 127.0.0.1:3104:3000 \
+            -v opencadence-ci-data:/app/data opencadence-community:ci
+          for attempt in {1..30}; do
+            status="$(docker inspect --format '{{.State.Health.Status}}' opencadence-ci)"
+            [ "$status" = healthy ] && break
+            [ "$status" = unhealthy ] && docker logs opencadence-ci && exit 1
+            sleep 1
+          done
+          [ "$(docker inspect --format '{{.State.Health.Status}}' opencadence-ci)" = healthy ]
+          curl --fail --silent http://127.0.0.1:3104/api/revision >/dev/null
+          docker exec opencadence-ci node scripts/backup.mjs /app/data/backups/ci.sqlite
+          docker rm --force opencadence-ci
+          docker run -d --name opencadence-ci -p 127.0.0.1:3104:3000 \
+            -v opencadence-ci-data:/app/data opencadence-community:ci
+          for attempt in {1..30}; do
+            status="$(docker inspect --format '{{.State.Health.Status}}' opencadence-ci)"
+            [ "$status" = healthy ] && break
+            [ "$status" = unhealthy ] && docker logs opencadence-ci && exit 1
+            sleep 1
+          done
+          [ "$(docker inspect --format '{{.State.Health.Status}}' opencadence-ci)" = healthy ]
+          docker exec opencadence-ci node -e \
+            "const {DatabaseSync}=require('node:sqlite'); const db=new DatabaseSync('/app/data/backups/ci.sqlite',{readOnly:true}); if(db.prepare('PRAGMA integrity_check').get().integrity_check!=='ok') process.exit(1)"
+      - name: Clean up container smoke test
+        if: always()
+        run: |
+          docker rm --force opencadence-ci 2>/dev/null || true
+          docker volume rm opencadence-ci-data 2>/dev/null || true

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "cadence": {
+      "command": "node",
+      "args": ["/absolute/path/to/cadence/scripts/mcp.mjs"]
+    }
+  }
+}

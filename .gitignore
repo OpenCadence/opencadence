@@ -1,0 +1,29 @@
+# Dependencies and generated build output
+node_modules/
+.next/
+next-env.d.ts
+*.tsbuildinfo
+coverage/
+playwright-report/
+test-results/
+
+# Live records and database backups (never commit)
+data/
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+
+# Secrets and local MCP / Pi configuration
+.env*
+!.env.example
+.mcp.json
+mcp.config.json
+.pi/
+
+# Logs and editor / OS artifacts
+*.log
+*.bak
+.DS_Store

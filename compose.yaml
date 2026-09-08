@@ -1,0 +1,16 @@
+services:
+  cadence:
+    build: .
+    image: opencadence-community:local
+    restart: unless-stopped
+    environment:
+      DATABASE_PATH: /app/data/cadence.sqlite
+      CADENCE_ALLOWED_HOSTS: ${CADENCE_ALLOWED_HOSTS:-}
+    ports:
+      # Localhost-only by default. Do not change this without adding access protection.
+      - "127.0.0.1:${CADENCE_PORT:-3000}:3000"
+    volumes:
+      - cadence-data:/app/data
+
+volumes:
+  cadence-data:
