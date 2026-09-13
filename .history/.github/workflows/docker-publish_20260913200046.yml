@@ -7,6 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository_owner }}/opencadence
 
 jobs:
   build-and-push:
@@ -34,7 +35,6 @@ jobs:
         run: |
           echo "date_tag=$(date -u +%Y.%m.%d)" >> "$GITHUB_OUTPUT"
           echo "short_sha=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
-          echo "image_name=$(echo '${{ github.repository_owner }}/opencadence' | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
 
       - name: Build and push
         uses: docker/build-push-action@v6
@@ -44,6 +44,6 @@ jobs:
           build-args: |
             SOURCE_REVISION=${{ steps.vars.outputs.short_sha }}
           tags: |
-            ${{ env.REGISTRY }}/${{ steps.vars.outputs.image_name }}:latest
-            ${{ env.REGISTRY }}/${{ steps.vars.outputs.image_name }}:${{ steps.vars.outputs.date_tag }}
-            ${{ env.REGISTRY }}/${{ steps.vars.outputs.image_name }}:sha-${{ steps.vars.outputs.short_sha }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.date_tag }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${{ steps.vars.outputs.short_sha }}
